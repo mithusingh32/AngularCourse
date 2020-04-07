@@ -1,0 +1,76 @@
+<!-- We binded the disabled html property to the variable allowNewServer. When allowNewServer
+changes, so will the properties' value -->
+<button 
+class="btn btn-primary" 
+[disabled]="!allowNewServer">
+Add Server</button> 
+
+<!-- Below shows how to use string interpolation and property binding. You can see that innerText
+and using {{}} perform the same task.  -->
+<p>{{ allowNewServer }} </p>
+<p [innerText]="allowNewServer"> </p>
+<app-server></app-server>
+
+<hr>
+<!-- Angular doesnt use onClicked event; it has its own event syntax: (eventName). such as (clicked)  
+Full syntax (eventName) = "method/code you want to execute"-->
+<button 
+class="btn btn-primary" 
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">
+Add Server</button> 
+<p>{{ serverCreationStatus }}</p>
+
+<!-- Passing and Using Data Events
+$event - reserved for event binding. It is usually the data associated with the event.
+The $event contains information about the event that is occuring that can be used such as input value, coordinates of mouse click, etc etc -->
+<hr>
+<label>Server Name</label>
+<input 
+type="text" 
+class="form-control"
+(input)="onUpdateServerName($event)">
+
+<button 
+class="btn btn-primary" 
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">
+Add Server</button> 
+<p>{{ serverCreationStatus }}</p>
+
+<!-- Two-Way Binding 
+Syntax: [(directiveName)]="variable or function"
+example: [(ngModel)]="serverName"-->
+<hr>
+<label>Server Name</label>
+<input 
+type="text" 
+class="form-control"
+[(ngModel)]="serverName">
+
+<button 
+class="btn btn-primary" 
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">
+Add Server</button> 
+<p>{{ serverCreationStatus }}</p>
+
+
+<!-- Exercise 2
+1. Add a input field which updates a property {{username}} via Two-Way-Binding
+2. Output the username property via String Interpolation (in a paragraph below the input)
+3. Add a button which may only be clicked if the username is not an empty string
+4. Upon clicking the button, the username should be reset to an empty string-->
+<hr>
+<h2>Exercise 2</h2>
+<input 
+type="text"
+class = "form-control"
+[(ngModel)]="userName">
+
+<button
+class="btn btn-primary"
+[disabled]="isInputEmpty()"
+(click)="onClicked()">Add User</button>
+
+<p [hidden]="hideParagraph">Welcome {{ inputUserName }} to this exercise. In this we are showing that I, the web dev, know how to use databinding. </p>
