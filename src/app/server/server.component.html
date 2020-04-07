@@ -1,6 +1,15 @@
 <!-- Below is different ways to use string interpolation. First one is a direct
 typescript placement of a string. The second is accesing the variable. And third
 is calling a function -->
-<p>{{ 'Server' }} with ID {{serverID}} is {{getServerStatus()}}</p> 
 
-<!-- Property Binding.  -->
+
+<!-- ngStyle -  attribute directive. 
+Syntax: [ngStyle]="attribute property such as color" : method. or expression
+ngStyle allows us to dynamically change the css style dynamically 
+Allows us to dynamically change the CSS style-->
+
+<p [ngStyle]="{'background-color': getColor()}"
+[ngClass]="{'online': serverStatus === 'online'}">{{ 'Server' }} with ID {{serverID}} is {{getServerStatus()}}</p> 
+
+<!-- ngCLass - allows us to dynamically add or remove css classes
+syntax: [ngCLass]="{css class: expression or method indicating to apply or not to apply the class }" -->

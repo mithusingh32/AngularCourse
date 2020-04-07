@@ -1,30 +1,49 @@
+<!-- Exercise 2
+1. Add a input field which updates a property {{username}} via Two-Way-Binding
+2. Output the username property via String Interpolation (in a paragraph below the input)
+3. Add a button which may only be clicked if the username is not an empty string
+4. Upon clicking the button, the username should be reset to an empty string-->
+<hr>
+<h2>Exercise 2</h2>
+<input type="text" class="form-control" [(ngModel)]="userName">
+
+<button class="btn btn-primary" [disabled]="isInputEmpty()" (click)="onClicked()">Add User</button>
+
+<p [hidden]="hideParagraph">Welcome {{ inputUserName }} to this exercise. In this we are showing that I, the web dev,
+    know how to use databinding. </p>
+
+<hr>
+
+
+
+
 <!-- We binded the disabled html property to the variable allowNewServer. When allowNewServer
 changes, so will the properties' value -->
-<button 
+<!-- <button 
 class="btn btn-primary" 
 [disabled]="!allowNewServer">
-Add Server</button> 
+Add Server</button>  -->
 
 <!-- Below shows how to use string interpolation and property binding. You can see that innerText
 and using {{}} perform the same task.  -->
-<p>{{ allowNewServer }} </p>
+<!-- <p>{{ allowNewServer }} </p>
 <p [innerText]="allowNewServer"> </p>
-<app-server></app-server>
+<app-server></app-server> -->
 
 <hr>
 <!-- Angular doesnt use onClicked event; it has its own event syntax: (eventName). such as (clicked)  
 Full syntax (eventName) = "method/code you want to execute"-->
-<button 
+<!-- <button 
 class="btn btn-primary" 
 [disabled]="!allowNewServer"
 (click)="onCreateServer()">
 Add Server</button> 
-<p>{{ serverCreationStatus }}</p>
+<p>{{ serverCreationStatus }}</p> -->
 
 <!-- Passing and Using Data Events
 $event - reserved for event binding. It is usually the data associated with the event.
 The $event contains information about the event that is occuring that can be used such as input value, coordinates of mouse click, etc etc -->
-<hr>
+<!-- <hr>
 <label>Server Name</label>
 <input 
 type="text" 
@@ -36,41 +55,35 @@ class="btn btn-primary"
 [disabled]="!allowNewServer"
 (click)="onCreateServer()">
 Add Server</button> 
-<p>{{ serverCreationStatus }}</p>
+<p>{{ serverCreationStatus }}</p> -->
 
 <!-- Two-Way Binding 
 Syntax: [(directiveName)]="variable or function"
 example: [(ngModel)]="serverName"-->
 <hr>
 <label>Server Name</label>
-<input 
-type="text" 
-class="form-control"
-[(ngModel)]="serverName">
+<input type="text" class="form-control" [(ngModel)]="serverName">
 
-<button 
-class="btn btn-primary" 
-[disabled]="!allowNewServer"
-(click)="onCreateServer()">
-Add Server</button> 
-<p>{{ serverCreationStatus }}</p>
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">
+    Add Server</button>
+<!-- <p>{{ serverCreationStatus }}</p> -->
 
 
-<!-- Exercise 2
-1. Add a input field which updates a property {{username}} via Two-Way-Binding
-2. Output the username property via String Interpolation (in a paragraph below the input)
-3. Add a button which may only be clicked if the username is not an empty string
-4. Upon clicking the button, the username should be reset to an empty string-->
-<hr>
-<h2>Exercise 2</h2>
-<input 
-type="text"
-class = "form-control"
-[(ngModel)]="userName">
 
-<button
-class="btn btn-primary"
-[disabled]="isInputEmpty()"
-(click)="onClicked()">Add User</button>
+<!-- Directives are instructions in the DOM. 
+When we place a selector in a componenet, we're telling Angular to drop in the component there-
+We usually use attribute selector for directive but you can also create your own .
+There are bunch of built-in directives which are shown below-->
 
-<p [hidden]="hideParagraph">Welcome {{ inputUserName }} to this exercise. In this we are showing that I, the web dev, know how to use databinding. </p>
+<!-- ngIf else- works like a n if statement 
+THe * (star) before the ngIf is required because its a structural directive, meaning that it
+either adds or removes a structure to the DOM -->
+<p *ngIf="serverCreated; else noServer">Server was created, server nanme is {{ serverName }}</p>
+
+<!-- The # is a locator. This will show unless the ngIf statement exists-->
+<ng-template #noServer>
+    <p>No Server Created</p>
+</ng-template>
+
+<!-- *ngFor is a structural directive. It will loop through something and create that many structures in the DOM -->
+<app-server *ngFor="let server of servers"></app-server>

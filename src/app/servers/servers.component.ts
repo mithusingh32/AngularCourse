@@ -12,6 +12,10 @@ export class ServersComponent implements OnInit {
     allowNewServer = false;
     serverCreationStatus: string = "No Server Created";
     serverName = "";
+    serverCreated = false;
+    servers = ['TestServer1', 'TestServer2', 'TestServer3'];
+
+    // Ex2 variables
     userName: string;
     inputUserName: string; 
     hideParagraph = true;
@@ -27,6 +31,8 @@ export class ServersComponent implements OnInit {
 
     onCreateServer() {
         this.serverCreationStatus = "Server " + this.serverName + " was created";
+        this.servers.push(this.serverName);
+        this.serverCreated = true;
     }
 
     onUpdateServerName(event: Event) {
@@ -50,4 +56,5 @@ export class ServersComponent implements OnInit {
         this.inputUserName = this.userName;
         this.userName = "";
     }
+    /* End Exercise 2 */
 }
