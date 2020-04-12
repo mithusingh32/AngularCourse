@@ -1,16 +1,22 @@
-<div class="container">
-    <!-- Here we're calling a funtion when one of the events is emited by the cockpit componentr -->
-    <app-cockpit (serverCreated)="onServerAdded($event)" (blueprintCreated)="onBlueprintAdded($event)"></app-cockpit>
-    <hr>
-    <div class="row">
-        <div class="col-xs-12">
-            <app-server-element *ngFor="let serverElement of serverElements" [srvElement]="serverElement">
-                <p #contentParagraph>
-                    <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
-                    <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
-                </p>
-            </app-server-element> 
-        </div>
-    </div>
+<!-- 
+1    Create three new components: GameControl, Odd and Even
+2    The GameControl Component should have buttons to start and stop the game
+3    When starting the game, an event (holding a incrementing number) should get emitted each second (ref = setInterval())
+4    The event should be listenable from outside the component
+5    When stopping the game, no more events should get emitted (clearInterval(ref))
+6    A new Odd component should get created for every odd number emitted, the same should happen for the Even Component (on even numbers)
+7    Simply output Odd - NUMBER or Even - NUMBER in the two components
+8    Style the element (e.g. paragraph) holding your output text differently in both components -->
 
+
+
+<div class="container">
+  <div class="row">
+    <app-game-control (intervalEvent)="intervalField($event)"></app-game-control>
+  </div>
+  <hr>
+  <div class="row">
+    <app-odd *ngFor="let oddNumber of oddNumbers" [inputOddNumber]="oddNumber"></app-odd>
+    <app-even *ngFor="let evenNumber of evenNumbers" [inputEvenNumber]="evenNumber"></app-even>
+  </div>
 </div>
