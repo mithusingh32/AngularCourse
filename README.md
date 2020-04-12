@@ -2,7 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
-Each branch will a separate module
+* Each branch will a separate module
+* Master branch will be the main course project(s)
 
 ## Development server
 
