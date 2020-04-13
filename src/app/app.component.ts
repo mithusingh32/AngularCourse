@@ -10,7 +10,6 @@ export class AppComponent {
   loadedView = "recipe";
   
   onNavigate(inSelected: string) {
-    console.log("inSelected = " + inSelected);
     this.loadedView = inSelected;
   }
 }
