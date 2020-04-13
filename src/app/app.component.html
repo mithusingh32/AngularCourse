@@ -1,18 +1,47 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <button
-        class="btn btn-primary"
-        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <button class="btn btn-primary" (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
       <br><br>
       <ul class="list-group">
-        <li
-          class="list-group-item">
-        </li>
+        <!-- You can only have 1 structural directive at a time -->
+        <!-- <div *ngIf="onlyOdd">
+          <li class="list-group-item" *ngFor="let odd of oddNumbers" [ngClass]="{odd: odd % 2 != 0}" [ngStyle]="{backgroundColor: odd % 2 !== 0 ? 'yellow' : 'blue'}">
+            {{ odd }}
+          </li>
+        </div>
+
+        <div *ngIf="!onlyOdd">
+          <li class="list-group-item" *ngFor="let even of evenNumbers" [ngClass]="{odd: even % 2 != 0}" BasicHighlightDirective>
+            {{ even }}
+          </li>
+        </div> -->
+
+        <div *appUnless="onlyOdd">
+          <li class="list-group-item" *ngFor="let even of evenNumbers" [ngClass]="{odd: even % 2 != 0}" BasicHighlightDirective>
+            {{ even }}
+          </li>
+        </div>
+
       </ul>
-      <ng-template [ngIf]="onlyOdd">
-        <p>Only odd</p>
-      </ng-template>
+      <!-- Use the directive selector name to call it. You can see we don't use [] because we told angular that it is a attribute directive -->
+      <p appBasicHighlight>Style me</p>
+      <!-- Using the renderer is the better approach. It is better because there might be a situation where you do not have access to the DOM.
+           This allows the external components to pass in the colors to this directive. 
+           Angule will check the custom/angular directives before the native. That is how it nows that the [] is part of the directice and not an attribute of the HTML tag -->
+      <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">Style me</p>
+
+      <div [ngSwitch]="value">
+      <p *ngSwitchCase="1">
+      Value is 1
+      </p>
+      <p *ngSwitchCase="10">
+      Value is 10
+      </p>
+      <p *ngSwitchDefault>
+      value is default
+      </p>
+      </div>
     </div>
   </div>
 </div>
