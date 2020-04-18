@@ -1,9 +1,20 @@
-<app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <app-recipe-book  *ngIf="loadedView  === 'recipe'"></app-recipe-book>
-            <app-shopping-list *ngIf="loadedView !== 'recipe'"></app-shopping-list>
-        </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="nav nav-tabs">
+        <!-- The / indicated that its an absolute path. If no slash is provided then a relative path is used. The relative path will append to the currently path you have loaded. 
+              at the root level, its okay to use relative paths. -->
+        <!-- routerLinkActiveOptions gives us option on how to handle certain things with routing. For example; exact: true says that make it active when the path is EAXCTLY /-->
+        <!-- routerLinkActive applies a class based on the what page it is currently on -->
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
+        <li role="presentation" routerLinkActive="active"><a routerLink="/servers">Servers</a></li>
+        <li role="presentation" routerLinkActive="active"><a routerLink="/users">Users</a> </li>
+      </ul>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
