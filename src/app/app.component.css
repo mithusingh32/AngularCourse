@@ -1,0 +1,10 @@
+.container {
+  margin-top: 30px;
+}
+
+/* Only ng-invalid class indicated that element is invalid. 
+ng-touched indicated that it was touched by the user */
+input.ng-invalid.ng-touched, 
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

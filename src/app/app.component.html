@@ -1,9 +1,53 @@
-<app-header></app-header>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <router-outlet></router-outlet>
-            
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- #{name} sets the refrence name, so we can access it by passing it -->
+      <form (ngSubmit)="onSubmitUsingViewChild()" #formInput="ngForm">
+        <!-- ngModelGroup allows us to group things together. When we access the value field, we'll can see that userName and emailInput will be under the userData -->
+        <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" ngModel name="userName" required>
+          </div>
+          <button class="btn btn-default" type="button" (click)="suggestUserName()">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <!-- The #refName="ngModel" gives us the information about the control of the elemtn-->
+            <input type="email" id="email" class="form-control" ngModel name="emailInput" required email #emailInput="ngModel">
+            <span class="help-block" *ngIf="!emailInput.valid && emailInput.touched">Please Enter a Valid Email</span>
+          </div>
         </div>
+        <p class="text-danger" *ngIf="!userData.valid && userData.touched">User Data Invalid</p>
+        
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <!-- [ngModel]="'value name'" allows us to set the defualt value-->
+          <select id="secret" class="form-control" [ngModel]="'pet'" name="secretQuestion" required>
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="questionAnswer" rows="3" ngModel #answerField></textarea>
+        </div>
+        <p>Your reply: {{ answerField.value }}</p>
+
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input type="radio" name="gender" ngModel [value]="gender"> {{gender}}
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!formInput.valid">Submit</button>
+      </form>
+      <hr>
+      <div class="row" *ngIf="submitted">
+        <h3>Your Data</h3>
+        <div class="col-xs-12">
+          <h4>Username: {{user.username}}</h4>
+          <h4>EMail: {{user.email}}</h4>
+          <h4>Question: {{user.question}}</h4>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
